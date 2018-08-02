@@ -119,5 +119,46 @@ namespace SLBMVC.Models.DataBase
 				return albumPag;
 			}
 		}
+        
+        public static int GetIDByNameAndTitle(string artist, string title)
+        {
+            
+            using (var connection = GetConnection())
+            {
+                List<AlbumModel> albums = new List<AlbumModel>();
+
+                var sqlCommand = new SqlCommand();
+                sqlCommand.Connection = connection;
+                sqlCommand.CommandText = "SELECT AlbumID FROM Album Where Title = @Title and Artists = @Artists;";
+
+                var sqlTitleParam = new SqlParameter
+                {
+                    DbType = System.Data.DbType.String,
+                    Value = title,
+                    ParameterName = "@Title"
+                };
+                sqlCommand.Parameters.Add(sqlTitleParam);
+
+                var sqlArtistsParam = new SqlParameter
+                {
+                    DbType = System.Data.DbType.String,
+                    Value = artist,
+                    ParameterName = "@Artists"
+                };
+                sqlCommand.Parameters.Add(sqlArtistsParam);
+
+                var data = sqlCommand.ExecuteReader();
+                int id = 0;
+                while (data.HasRows && data.Read())
+                {
+                    id = (int)data["AlbumID"];
+                }
+
+                return id;
+
+            }
+
+           
+        }
 	}
 }

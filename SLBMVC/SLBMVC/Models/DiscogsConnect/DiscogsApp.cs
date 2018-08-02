@@ -29,12 +29,10 @@ namespace SLBMVC.Models.DiscogsConnect
 			}
 			catch (FormatException)
 			{
-				Console.WriteLine("Error: Wrong query format");
 				return null;
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Error: " + e.Message);
 				return null;
 			}
 		}

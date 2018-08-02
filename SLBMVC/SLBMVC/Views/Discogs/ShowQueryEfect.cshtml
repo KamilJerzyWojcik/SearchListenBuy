@@ -1,8 +1,7 @@
 ﻿@using SLBMVC.Models
 @model AlbumModel
 
-<a asp-action="QueryDiscogs">Wyszukaj jeszcze raz</a>
-
+<a class="btn btn-info action" asp-action="Add" asp-route-title="@ViewBag.title" asp-route-id="@ViewBag.id">Add to DB</a>
 
 
 <h1>@Model.Title</h1>

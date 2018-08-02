@@ -45,22 +45,17 @@ namespace SLBMVC.Models
 		{
 			try
 			{
-				Console.Clear();
+				
 				if (SourceManagerSave.AlbumExists(this)) throw new Exception("Album exist in Base");
 
 				int ID = SourceManagerSave.Add(this);
 				if (ID == -1) throw new Exception("Error, Data didn't save to Base");
 
-				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine($"zapisano {Title} do Bazy Danych pod ID: {ID}");
-				Console.ResetColor();
 				return ID;
 			}
 			catch (Exception e)
 			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine(e.Message);
-				Console.ResetColor();
+
 				return -1;
 			}
 		}
@@ -70,19 +65,11 @@ namespace SLBMVC.Models
 			try
 			{
 				if (ID <= 0) throw new Exception("Error, incorect album ID");
-
 				SourceManagerLoad.Load(this);
-
-				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine($"Odczytano z bazy danych album o ID: {ID}");
-				Console.ResetColor();
 				return this;
 			}
 			catch (Exception e)
 			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine(e.Message);
-				Console.ResetColor();
 				return this;
 			}
 		}

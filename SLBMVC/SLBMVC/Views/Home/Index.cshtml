@@ -1,6 +1,18 @@
 ﻿@using SLBMVC.Models
 @model List<AlbumModel>
 
+@if (TempData["Info"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["Info"]
+    </div>
+}
+@if (TempData["Succes"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Succes"]
+    </div>
+}
 
 
 <h1>List of Albums </h1>

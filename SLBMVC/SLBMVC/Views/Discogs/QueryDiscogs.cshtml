@@ -1,7 +1,65 @@
-﻿@model SLBMVC.Models.QueryModel
+﻿@model List<SLBMVC.Models.QueryModel>
 
 <form asp-action="QueryDiscogs" method="post">
-    <label asp-for="Title">Tytuł:</label>
-    <input asp-for="Title" type="text" />
+    <label asp-for="@Model[0].Title">Tytuł:</label>
+    <input asp-for="@Model[0].Title" type="text" />
     <input type="submit" value="Search" />
 </form>
+@if (!(Model[0].Title is null) || @Model[0].Title != "")
+{
+    <h1>Lista wyników dla: @Model[0].Title</h1>
+
+}
+else
+{
+    <h1>Wpisz poszukiwaną frazę</h1>
+
+}
+
+<div class="tableContainer">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Genres</th>
+                <th scope="col">Styles</th>
+                <th scope="col">Tracks</th>
+                <th scope="col">Videos</th>
+                <th scope="col">Images</th>
+                <th scope="col">Extra artists</th>
+                <th scope="col" colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!(Model[0].Title is null) || @Model[0].Title != "")
+            {
+                @for (int i = 1; i <= Model.Count - 1; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i)</th>
+                        <td>@Model[i].Title</td>
+                        <td>@Model[i].Artist</td>
+                        <td>@Model[i].Genres</td>
+                        <td>@Model[i].Styles</td>
+                        <td>@Model[i].Tracks</td>
+                        <td>@Model[i].Videos</td>
+                        <td>@Model[i].Images</td>
+                        <td>@Model[i].Extraartists</td>
+                        <td>
+                            @if (!Model[i].ExistInDB)
+                            {
+                                <a class="btn btn-info action" target="_blank" asp-action="ShowQueryEfect" asp-route-title="@Model[0].Title" asp-route-id="@(i-1)">Show detals</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-info action" target="_blank" asp-action="Album" asp-route-id="@Model[i].IDExistAlbum">Album Exist</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

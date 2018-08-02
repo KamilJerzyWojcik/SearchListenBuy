@@ -8,40 +8,45 @@ using SLBMVC.Models.DiscogsConnect;
 
 namespace SLBMVC.Controllers
 {
-	public class DiscogsController : Controller
-	{
-		public IActionResult Index()
-		{
+    public class DiscogsController : Controller
+    {
+        DiscogsApp discogsApp = new DiscogsApp();
 
-			return View();
-		}
+        public IActionResult QueryDiscogs()
+        {
+            List<QueryModel> query = new List<QueryModel>();
+            query.Add(new QueryModel());
+            return View(query);
+        }
 
-		[HttpGet]
-		public IActionResult QueryDiscogs()
-		{
-			return View();
-		}
+        [HttpPost]
+        public IActionResult QueryDiscogs(List<QueryModel> queryList)
+        {
+            List<AlbumModel> albumList = discogsApp.CreateListAlbumByQuery(queryList[0].Title);
+            if ((albumList[0] is null)) return View(queryList);
+            queryList.AddRange(QueryModel.CreateQueryList(albumList));
+            return View(queryList);
+        }
 
-		[HttpPost]
-		public IActionResult QueryDiscogs(QueryModel query)
-		{
-			DiscogsApp discogsApp = new DiscogsApp();
-			List<AlbumModel> albumList = discogsApp.CreateListAlbumByQuery(query.Title);
-			return View("ListQueryEfect", albumList);
-		}
 
-		public IActionResult ListQueryEfect(List<AlbumModel> albumList)
-		{
+        public IActionResult ShowQueryEfect(string title, int id)
+        {
+            AlbumModel album = discogsApp.CreateAlbumByQuery(title, id);
+            ViewBag.id = id;
+            ViewBag.title = title;
+            return View(album);
+        }
 
-			return View();
-		}
 
-		public IActionResult ShowQueryEfect(int id, string title)
-		{
-			DiscogsApp discogsApp = new DiscogsApp();
-			AlbumModel album = discogsApp.CreateAlbumByQuery(title, id);
+        public IActionResult Add(string title, int id)
+        {
+            AlbumModel album = discogsApp.CreateAlbumByQuery(title, id);
+            if (album.Save() == -1) TempData["Info"] = "Nie udał się zapis" ;
+            else TempData["Succes"]  ="zapisano do bazy";
 
-			return View(album);
-		}
-	}
+            List<QueryModel> query = new List<QueryModel>();
+            query.Add(new QueryModel());
+            return Redirect("/Home/Index");
+        }
+    }
 }

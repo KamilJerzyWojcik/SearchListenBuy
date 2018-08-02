@@ -275,9 +275,6 @@ namespace SLBMVC.Models.DataBase
 			}
 			catch (Exception e)
 			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine($"Error: " + e.Message);
-				Console.ResetColor();
 				return false;
 			}
 		}
