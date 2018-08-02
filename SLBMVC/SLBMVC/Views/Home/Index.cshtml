@@ -1,0 +1,35 @@
+﻿@using SLBMVC.Models
+@model List<AlbumModel>
+
+
+
+<h1>List of Albums </h1>
+
+@foreach (AlbumModel a in Model)
+{
+    <div>
+        <a asp-action="Album/@a.ID">@a.Title</a>
+    </div>
+}
+
+@if ((int)ViewBag.AllRows > 1)
+{
+    @for (int i = 1; i <= (int)ViewBag.AllRows; i++)
+    {
+        if (ViewBag.page == i)
+        {
+
+            @i
+
+        }
+        else
+        {
+
+            <a asp-action="index" asp-route-page="@i">@i</a>
+
+        }
+    }
+}
+<br />
+<br />
+<a asp-action="QueryDiscogs" asp-controller="Discogs">wyszukaj nowe</a>

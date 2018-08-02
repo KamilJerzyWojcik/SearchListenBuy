@@ -1,0 +1,59 @@
+﻿@using SLBMVC.Models
+@model AlbumModel
+
+<a asp-action="QueryDiscogs">Wyszukaj jeszcze raz</a>
+
+
+
+<h1>@Model.Title</h1>
+<h2>@Model.Artists</h2>
+
+<h3>Współpracownicy:</h3>
+<ul>
+    @for (int i = 0; i <= Model.ExtraArtists.Count - 1; i++)
+    {
+        <li>@Model.ExtraArtists[i].Name: @Model.ExtraArtists[i].Role  </li>
+    }
+</ul>
+
+<h3>Lista utworów:</h3>
+<ul>
+    @for (int i = 0; i <= Model.TrackList.Count - 1; i++)
+    {
+        <li>@Model.TrackList[i].Position @Model.TrackList[i].Duration @Model.TrackList[i].Title</li>
+    }
+</ul>
+
+<h3>typ:</h3>
+
+<ul>
+    @for (int i = 0; i <= Model.Genres.Count - 1; i++)
+    {
+        <li>@Model.Genres[i]</li>
+    }
+</ul>
+
+<h3>Style:</h3>
+<ul>
+    @for (int i = 0; i <= Model.Styles.Count - 1; i++)
+    {
+        <li>@Model.Styles[i]</li>
+    }
+</ul>
+
+<h3>grafika:</h3>
+@for (int i = 0; i <= Model.Images.Count - 1; i++)
+{
+    <img src="@Model.Images[i]">
+}
+
+<h3>teledyski youtube:</h3>
+<ul>
+    @for (int i = 0; i <= Model.Videos.Count - 1; i++)
+    {
+        <li>
+            <a href="@Model.Videos[i]" target="_blank">wideo youtube @(i + 1)</a>
+        </li>
+    }
+</ul>
+
