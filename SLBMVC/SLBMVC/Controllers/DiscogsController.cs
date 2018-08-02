@@ -12,7 +12,7 @@ namespace SLBMVC.Controllers
 	{
 		public IActionResult Index()
 		{
-			
+
 			return View();
 		}
 
@@ -39,9 +39,9 @@ namespace SLBMVC.Controllers
 		public IActionResult ShowQueryEfect(int id, string title)
 		{
 			DiscogsApp discogsApp = new DiscogsApp();
-			List<AlbumModel> albumList = discogsApp.CreateListAlbumByQuery(title);
-			if (id < albumList.Count) return View(albumList[id]);
-			else return View("ListQueryEfect", albumList);
+			AlbumModel album = discogsApp.CreateAlbumByQuery(title, id);
+
+			return View(album);
 		}
 	}
 }

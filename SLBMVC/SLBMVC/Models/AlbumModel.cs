@@ -27,6 +27,7 @@ namespace SLBMVC.Models
 			Videos = new List<string>();
 			Images = new List<string>();
 			ExtraArtists = new List<ArtistModel>();
+			Query = new QueryModel();
 		}
 
 		public int ID { get; set; } = 0;
@@ -38,6 +39,7 @@ namespace SLBMVC.Models
 		public List<string> Videos { get; set; }
 		public List<string> Images { get; set; }
 		public List<ArtistModel> ExtraArtists { get; set; }
+		public QueryModel Query { get; set; }
 
 		public int Save()
 		{

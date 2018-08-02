@@ -171,14 +171,14 @@ namespace SLBMVC.Models.DiscogsConnect
 			return true;
 		}
 
-		public AlbumModel CreateAlbumByQuery(string nameAlbum)
+		public AlbumModel CreateAlbumByQuery(string nameAlbum, int id = 0)
 		{
 			AlbumModel album = new AlbumModel();
-			DiscogsClient discogsClient = new DiscogsClient("NYqvEPnYZdPWmAFFMURi", "kEvfDhiyBRunRURKFjlMmoCKPjIcYiVU");
+			DiscogsClient discogsClient = new DiscogsClient("HfsyysppxnrCYpIttoYY", "hIuWlIIOvzhnINezvqJCeRJgeWYYNsNw");
 
 			string result = discogsClient.SetQuery(nameAlbum).GetQueryResult(); //zapytanie o album
 
-			string link = GetReleaseAlbumCDLink(result)[0]; //wyciagniecie linku do konretnego wydania
+			string link = GetReleaseAlbumCDLink(result)[id]; //wyciagniecie linku do konretnego wydania
 
 			string release = discogsClient.SetLink(link).GetLinkResult(); //zapytanie o wydanie konkretne
 			if (string.IsNullOrEmpty(release)) return null;
@@ -189,7 +189,7 @@ namespace SLBMVC.Models.DiscogsConnect
 
 		public List<AlbumModel> CreateListAlbumByQuery(string nameAlbum)
 		{
-			DiscogsClient discogsClient = new DiscogsClient("NYqvEPnYZdPWmAFFMURi", "kEvfDhiyBRunRURKFjlMmoCKPjIcYiVU");
+			DiscogsClient discogsClient = new DiscogsClient("HfsyysppxnrCYpIttoYY", "hIuWlIIOvzhnINezvqJCeRJgeWYYNsNw");
 
 			string result = discogsClient.SetQuery(nameAlbum).GetQueryResult(); //zapytanie o album
 
@@ -200,8 +200,9 @@ namespace SLBMVC.Models.DiscogsConnect
 
 				string rel = discogsClient.SetLink(l).GetLinkResult();
 				if (string.IsNullOrEmpty(rel)) return null;
-
-				albumList.Add(CreateAlbumByRelease(rel));
+				AlbumModel album = CreateAlbumByRelease(rel);
+				album.Query.Title = nameAlbum;
+				albumList.Add(album);
 			}
 
 
