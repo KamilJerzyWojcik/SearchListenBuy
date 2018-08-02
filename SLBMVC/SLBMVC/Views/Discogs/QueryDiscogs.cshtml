@@ -15,7 +15,12 @@ else
     <h1>Wpisz poszukiwaną frazę</h1>
 
 }
-
+@if (TempData["Info"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["Info"]
+    </div>
+}
 <div class="tableContainer">
     <table class="table">
         <thead class="thead-dark">

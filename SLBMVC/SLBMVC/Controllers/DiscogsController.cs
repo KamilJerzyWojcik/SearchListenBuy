@@ -20,10 +20,21 @@ namespace SLBMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult QueryDiscogs(List<QueryModel> queryList)
+        public IActionResult QueryDiscogs(List<QueryModel> queryList, string title = "")
         {
-            List<AlbumModel> albumList = discogsApp.CreateListAlbumByQuery(queryList[0].Title);
-            if ((albumList[0] is null)) return View(queryList);
+            List<AlbumModel> albumList = new List<AlbumModel>();
+            if (title != "")
+            {
+                queryList.Add(new QueryModel());
+                queryList[0].Title = title;
+            }
+
+            albumList = discogsApp.CreateListAlbumByQuery(queryList[0].Title);
+            if (albumList.Count <= 0 || (albumList[0] is null))
+            {
+                TempData["Info"] = "Brak wyników";
+                return View(queryList);
+            }
             queryList.AddRange(QueryModel.CreateQueryList(albumList));
             return View(queryList);
         }

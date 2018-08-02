@@ -3,12 +3,31 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/cover.css" rel="stylesheet">
+    <title>Search Listen Buy</title>
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="starter-template">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#">SLB</a>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault" style="min-width:50rem">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <span class="badge badge-pill badge-secondary"><a asp-action="Index" asp-controller="Home" class="nav-link">Home</a></span>
+                    </li>
+                </ul>
+                <form asp-action="QueryDiscogs" asp-controller="Discogs" method="post">
+                    <label name="title">Tytuł:</label>
+                    <input name="title" type="text" class="form-control mr-sm-2" placeholder="All eyez on me" aria-label="Search" />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <div>
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>
