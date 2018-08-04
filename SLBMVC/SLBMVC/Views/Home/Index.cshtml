@@ -1,47 +1,35 @@
-﻿@using SLBMVC.Models
-@model List<AlbumModel>
+﻿
 
-@if (TempData["Info"] != null)
-{
-    <div class="alert alert-info" role="alert">
-        @TempData["Info"]
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-2">
+        @Html.Partial("_Show")
     </div>
-}
-@if (TempData["Succes"] != null)
-{
-    <div class="alert alert-success" role="alert">
-        @TempData["Succes"]
+
+
+    <div class=" col-sm-12 col-md-12 col-lg-9">
+        @Html.Partial("_Content")
     </div>
-}
 
+    <div class="col-md-12 col-sm-12 col-lg-1">
+        <nav aria-label="...">
+            <ul class="pagination pagination-lg flex-column">
+                @if ((int)ViewBag.AllRows > 1)
+                {
+                    @for (int i = 1; i <= (int)ViewBag.AllRows; i++)
+                    {
+                        if (ViewBag.page == i)
+                        {
 
-<h1>List of Albums </h1>
+                            <li class="page-item active"><a class="page-link text-center" asp-action="index" asp-route-page="@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a class="page-link text-center" asp-action="index" asp-route-page="@i">@i</a></li>
+                        }
+                    }
+                }
 
-@foreach (AlbumModel a in Model)
-{
-    <div>
-        <a asp-action="Album/@a.ID">@a.Title</a>
+            </ul>
+        </nav>
     </div>
-}
-
-@if ((int)ViewBag.AllRows > 1)
-{
-    @for (int i = 1; i <= (int)ViewBag.AllRows; i++)
-    {
-        if (ViewBag.page == i)
-        {
-
-            @i
-
-        }
-        else
-        {
-
-            <a asp-action="index" asp-route-page="@i">@i</a>
-
-        }
-    }
-}
-<br />
-<br />
-<a asp-action="QueryDiscogs" asp-controller="Discogs">wyszukaj nowe</a>
+</div>

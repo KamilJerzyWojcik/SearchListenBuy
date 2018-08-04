@@ -1,0 +1,36 @@
+﻿@using SLBMVC.Models
+@model List<AlbumModel>
+
+@if (TempData["Info"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["Info"]
+    </div>
+}
+
+@if (TempData["Succes"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Succes"]
+    </div>
+}
+
+
+<div class="row">
+    @for (int i = 0; i <= Model.Count - 1; i++)
+    {
+        <div class="card col-sm-6 col-md-4 text-center">
+            <a asp-action="Album/@Model[i].ID" asp-controller="Home">
+                <img class="rounded-circle center" src="@Model[i].Images[0]" alt="Generic placeholder image" width="140" height="140">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">@Model[i].Title</h5>
+                <p class="card-text">
+                <p class="text">Artist : @Model[i].Artists</p>
+                <p class="text">Style: @Model[i].Styles[0]</p>
+                <p class="text">Genre: @Model[i].Genres[0]</p>
+                </p>
+            </div>
+        </div>
+    }
+</div>

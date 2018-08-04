@@ -17,11 +17,10 @@ namespace SLBMVC.Controllers
 		{
 			ViewBag.Title = "SLB - Search Listen Buy";
 
-			ViewBag.AllRows = Math.Ceiling(SqlHelper.NumberAllAlbums() / 3.0);
+			ViewBag.AllRows = Math.Ceiling(SqlHelper.NumberAllAlbums() / 6.0);
 			ViewBag.page = page;
-			albums = SqlHelper.GetIDs(page, 3);
+			albums = SqlHelper.GetIDs(page, 6);
 			ReLoadAlbums(albums);
-
 			return View(albums);
 		}
 

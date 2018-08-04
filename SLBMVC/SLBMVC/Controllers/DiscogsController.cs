@@ -32,7 +32,7 @@ namespace SLBMVC.Controllers
             albumList = discogsApp.CreateListAlbumByQuery(queryList[0].Title);
             if (albumList.Count <= 0 || (albumList[0] is null))
             {
-                TempData["Info"] = "Brak wyników";
+                TempData["Info"] = "No content avalible";
                 return View(queryList);
             }
             queryList.AddRange(QueryModel.CreateQueryList(albumList));
@@ -52,8 +52,8 @@ namespace SLBMVC.Controllers
         public IActionResult Add(string title, int id)
         {
             AlbumModel album = discogsApp.CreateAlbumByQuery(title, id);
-            if (album.Save() == -1) TempData["Info"] = "Nie udał się zapis" ;
-            else TempData["Succes"]  ="zapisano do bazy";
+            if (album.Save() == -1) TempData["Info"] = "Erorr, Album didn't saved" ;
+            else TempData["Succes"]  ="Album saved to base";
 
             List<QueryModel> query = new List<QueryModel>();
             query.Add(new QueryModel());

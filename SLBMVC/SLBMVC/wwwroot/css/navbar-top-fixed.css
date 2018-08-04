@@ -1,0 +1,37 @@
+﻿/* Show it is fixed to the top */
+body {
+    min-height: 100%;
+    padding-top: 4.5rem;
+    background-color: darkgray;
+}
+
+
+.card {
+
+    width:300px;
+    background-color: lightgray;
+}
+
+.center {
+    margin-top:10px;
+}
+
+.vertical-pagination {
+    display: block;
+}
+
+.text {
+    line-height: 1;
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+
+.eraser
+{
+    clear:both;
+}
+
+.row-color {
+    background-color: #e6f0ff;
+    font-size:15px;
+}

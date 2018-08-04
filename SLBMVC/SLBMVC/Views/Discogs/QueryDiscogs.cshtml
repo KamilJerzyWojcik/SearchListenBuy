@@ -1,30 +1,26 @@
 ﻿@model List<SLBMVC.Models.QueryModel>
 
-<form asp-action="QueryDiscogs" method="post">
-    <label asp-for="@Model[0].Title">Tytuł:</label>
-    <input asp-for="@Model[0].Title" type="text" />
-    <input type="submit" value="Search" />
-</form>
-@if (!(Model[0].Title is null) || @Model[0].Title != "")
-{
-    <h1>Lista wyników dla: @Model[0].Title</h1>
-
-}
-else
-{
-    <h1>Wpisz poszukiwaną frazę</h1>
-
-}
 @if (TempData["Info"] != null)
 {
     <div class="alert alert-info" role="alert">
         @TempData["Info"]
     </div>
 }
+else
+{
+
+    @if (!(Model[0].Title is null) || @Model[0].Title != "")
+    {
+        <div class="alert alert-success" role="alert">
+            List of content for: @Model[0].Title
+        </div>
+    }
+
+}
 <div class="tableContainer">
     <table class="table">
         <thead class="thead-dark">
-            <tr>
+            <tr class="text-center">
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Artist</th>
@@ -42,7 +38,7 @@ else
             {
                 @for (int i = 1; i <= Model.Count - 1; i++)
                 {
-                    <tr>
+                    <tr class="row-color text-center">
                         <th scope="row">@(i)</th>
                         <td>@Model[i].Title</td>
                         <td>@Model[i].Artist</td>
