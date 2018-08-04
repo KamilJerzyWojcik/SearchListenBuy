@@ -27,15 +27,14 @@ namespace SLBMVC.Models
                 QueryModel query = new QueryModel();
                 query.ExistInDB = SourceManagerSave.AlbumExists(album);
                 if(query.ExistInDB) SqlHelper.GetIDByNameAndTitle(album.Artists, album.Title);
-                query.Title = album.Title;
-                query.Artist = album.Artists;
-                query.Extraartists = album.ExtraArtists.Count;
-                query.Genres = String.Join(", ", album.Genres.ToArray());
-                query.Styles = String.Join(", ", album.Styles.ToArray());
-                query.Tracks = album.TrackList.Count;
-                query.Videos = album.Videos.Count;
-                query.Images = album.Images.Count;
-                query.Extraartists = album.ExtraArtists.Count;
+                if(!(album.Title is null)) query.Title = album.Title;
+                if (!(album.Artists is null)) query.Artist = album.Artists;
+                if (album.ExtraArtists.Count > 0) query.Extraartists = album.ExtraArtists.Count;
+                if (album.Genres.Count > 0) query.Genres = String.Join(", ", album.Genres.ToArray());
+                if (album.Styles.Count > 0) query.Styles = String.Join(", ", album.Styles.ToArray());
+                if (album.TrackList.Count > 0) query.Tracks = album.TrackList.Count;
+                if (album.Videos.Count > 0) query.Videos = album.Videos.Count;
+                if (album.Images.Count > 0) query.Images = album.Images.Count;
                 queryList.Add(query);
             }
             return queryList;

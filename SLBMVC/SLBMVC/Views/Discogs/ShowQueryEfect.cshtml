@@ -3,9 +3,15 @@
 
 <a class="btn btn-info action" asp-action="Add" asp-route-title="@ViewBag.title" asp-route-id="@ViewBag.id">Add to DB</a>
 
+@if (!(Model.Title is null))
+{
+    <h1>@Model.Title</h1>
+}
 
-<h1>@Model.Title</h1>
-<h2>@Model.Artists</h2>
+@if (!(Model.Artists is null))
+{
+    <h2>@Model.Artists</h2>
+}
 
 <h3>Współpracownicy:</h3>
 <ul>
