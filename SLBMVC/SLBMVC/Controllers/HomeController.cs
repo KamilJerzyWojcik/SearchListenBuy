@@ -32,7 +32,24 @@ namespace SLBMVC.Controllers
 			return View(currentAlbum);
 		}
 
-		private void GetAlbum(List<AlbumModel> albums, int id)
+        public IActionResult Random()
+        {
+            int numberAlbums = SqlHelper.NumberAllAlbums();
+            List<AlbumModel> AlbumWithids = SqlHelper.GetIDs(1, numberAlbums);
+            numberAlbums = AlbumWithids.Count();
+
+            Random rand = new Random();
+            int num = rand.Next(0, numberAlbums);
+           
+
+            currentAlbum = AlbumWithids[num];
+            currentAlbum.Reload();
+            ViewBag.Title = "SLB - Search Listen Buy";
+
+            return Redirect($"/Home/Album/{currentAlbum.ID}");
+        }
+
+        private void GetAlbum(List<AlbumModel> albums, int id)
 		{
 			for (int i = 0; i <= albums.Count - 1; i++)
 			{

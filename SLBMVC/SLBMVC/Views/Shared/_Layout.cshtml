@@ -13,6 +13,7 @@
 
     <!-- Custom styles for this template -->
     <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
+   
 </head>
 
 <body>
@@ -25,10 +26,14 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="MemoryGame" asp-action="Index">Game<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Random album</a>
+                    <a class="nav-link" asp-controller="Home" asp-action="Random">Random album</a>
                 </li>
             </ul>
             <form asp-action="QueryDiscogs" asp-controller="Discogs" method="post" class="form-inline mt-2 mt-md-0">
@@ -38,7 +43,7 @@
         </div>
     </nav>
     <main role="main" class="container">
-            @RenderBody()
+        @RenderBody()
     </main>
 
     <!-- Bootstrap core JavaScript
@@ -48,5 +53,8 @@
     <script src="~/lib/jQuery/jquery-3.3.1.min.js"></script>
     <script src="~/lib/popper/popper.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/MemorizeGame/memorize.js"></script>
+
+
 </body>
 </html>
