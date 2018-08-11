@@ -7,6 +7,18 @@
 <h1>@Model.Title</h1>
 <h2>@Model.Artists</h2>
 
+
+<iframe id="player" type="text/html" width="640" height="360"
+        src=""
+        frameborder="0"></iframe>
+
+
+<div class="clearfix"></div>
+@for (int i = 0; i <= Model.Videos.Count - 1; i++)
+{
+    <button class="btn btn-dark urlData" data-url="@Model.Videos[i]">@i</button>
+}
+
 <h3>Współpracownicy:</h3>
 <ul>
     @for (int i = 0; i <= Model.ExtraArtists.Count - 1; i++)
@@ -56,3 +68,12 @@
     }
 </ul>
 
+
+
+
+
+
+
+
+
+<script src="~/js/YoutubeApi/YoutubeApi.js"></script>

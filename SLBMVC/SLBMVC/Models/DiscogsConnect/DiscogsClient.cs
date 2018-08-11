@@ -83,16 +83,12 @@ namespace SLBMVC.Models.DiscogsConnect
 			}
 			catch (WebException e)
 			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("Error: " + e.Message);
-				Console.ResetColor();
+				
 				return "";
 			}
 			catch (Exception e)
 			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("Error: " + e.Message);
-				Console.ResetColor();
+				
 				return "";
 			}
 
@@ -119,16 +115,12 @@ namespace SLBMVC.Models.DiscogsConnect
 			}
 			catch (WebException)
 			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("Error WebException: check your connection or correct link");
-				Console.ResetColor();
+				
 				return "";
 			}
 			catch (Exception e)
 			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("Error: " + e.Message);
-				Console.ResetColor();
+			
 				return "";
 			}
 		}
